@@ -1,0 +1,15 @@
+CDBEasy
+===========
+
+Simple module to help reading and writing CDB files in php.
+
+About:
+--------------------
+Cdb is "a fast, reliable, lightweight package for creating and reading constant databases." It is from the author of 
+qmail and can be found at http://cr.yp.to/cdb.html. Since it is constant, It support reading/writing (PHP 4.3.0 support writing) 
+(not updating) through the internal cdb library.
+
+Requirement & Installation:
+--------------------
+http://www.php.net/manual/en/dba.requirements.php
+http://www.php.net/manual/en/dba.installation.php
