@@ -166,6 +166,7 @@ class CDBUtils{
 class CDBReader{
 	private $cdb 	  = null;
 	private $fileName = null;
+	private $lastKey  = null;
 	private $isResetReadPointer = null;
 	
 	public function __construct($fileName = null){
@@ -299,24 +300,23 @@ class CDBReader{
 	public function getInBatch($batchSize = 0) {
 	    $results = array();
 	    $counter = 0;
-	    $k 		 = null;
 	    
 	    if($this->isResetReadPointer){
-	    	$k = dba_firstkey($this->cdb);
+	    	$this->lastKey = dba_firstkey($this->cdb);
 	    	$this->isResetReadPointer = false;
 	    }
 	    
 	    if($batchSize > 0){
-		    for(; $k !== false && $counter < $batchSize; $k = dba_nextkey($this->cdb)) {
-		    	if(!empty($k)){
-			        $results[$k] = dba_fetch($k, $this->cdb);
+		    for(; $this->lastKey !== false && $counter < $batchSize; $this->lastKey = dba_nextkey($this->cdb)) {
+		    	if(!empty($this->lastKey)){
+			        $results[$this->lastKey] = dba_fetch($this->lastKey, $this->cdb);
 			        $counter++;
 		    	}
 		    }
 	    }else{
-	    	for(; $k !== false; $k = dba_nextkey($this->cdb)) {
-	    		if(!empty($k)){
-			        $results[$k] = dba_fetch($k, $this->cdb);
+	    	for(; $this->lastKey !== false; $this->lastKey = dba_nextkey($this->cdb)) {
+	    		if(!empty($this->lastKey)){
+			        $results[$this->lastKey] = dba_fetch($this->lastKey, $this->cdb);
 			        $counter++;
 	    		}
 		    }	
