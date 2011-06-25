@@ -1,7 +1,11 @@
 CDBEasy
 ===========
 
-A Simple module to help reading and writing CDB files in php.
+A Simple module to help reading and writing CDB files in php. 
+
+Limitation :
+1) We can open CDB files in either to read or write mode. We can't update values in CDB file. CDBEasy has wrapper function to do      these operation.
+2) One CDB file can be max of 4 GB length. It is due to it's Hashing algorithm.
 
 About:
 --------------------
